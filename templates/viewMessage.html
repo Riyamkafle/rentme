@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="overflow-x-auto p-10">
+    <table class="  min-w-full bg-white border border-gray-300">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b ">Email</th>
+                <th class="py-2 px-4 border-b ">Contact</th>
+                <th class="py-2 px-4 border-b ">Message</th>
+                <th class="py-2 px-4 border-b ">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for message in messages%}
+            <tr>
+                <td class="py-2 px-4 border-b text-center">{{message.email}}</td>
+                <td class="py-2 px-4 border-b text-center">{{message.contact_number}}</td>
+                <td class="py-2 px-4 border-b text-center">{{message.message|slice:20}}</td>
+                <td class="py-2 px-4 border-b text-center">
+                    <a  href = "{%url 'messageDetail' message.pk%}" class="bg-blue-500 text-white px-2 py-1 rounded">view message</a>
+                </td>
+            </tr>
+            {%endfor%}
+           
+        </tbody>
+    </table>
+</div>
+
+{%endblock content%}

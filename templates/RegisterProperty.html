@@ -1,65 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Property</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+{% block content %}
+<style>
+    /* Add your custom styles here */
+    #id_title,
+    #id_description,
+    #id_location,
+    #id_price,
+    #id_bedrooms,
+    #id_bathrooms,
+    #id_image {
+        /* Common styles for input fields */
+        width: calc(100% - 1rem); /* Reduce width */
+        padding: 0.25rem; /* Reduce padding */
+        margin-bottom: 0.125rem; /* Adjust margin */
+        border: 1px solid #ccc;
+        border-radius: 0.125rem;
+        outline: none;
+        transition: border-color 0.3s;
+        font-size: 0.75rem; /* Reduce font size */
+    }
 
-<body class="bg-gray-100">
-    <div class="min-h-screen flex justify-center items-center">
-        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-            <h2 class="text-2xl font-bold mb-4">Add Property</h2>
-            <form>
-                <div class="mb-4">
-                    <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title</label>
-                    <input type="text" id="title" name="title"
-                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500">
-                </div>
-                <div class="mb-4">
-                    <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
-                    <textarea id="description" name="description"
-                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"></textarea>
-                </div>
-                <div class="mb-4">
-                    <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Location</label>
-                    <input type="text" id="location" name="location"
-                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500">
-                </div>
-                <div class="mb-4">
-                    <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price</label>
-                    <input type="number" id="price" name="price"
-                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500">
-                </div>
-                <div class="mb-4">
-                    <label for="bedrooms" class="block text-gray-700 text-sm font-bold mb-2">Bedrooms</label>
-                    <input type="number" id="bedrooms" name="bedrooms"
-                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500">
-                </div>
-                <div class="mb-4">
-                    <label for="bathrooms" class="block text-gray-700 text-sm font-bold mb-2">Bathrooms</label>
-                    <input type="number" id="bathrooms" name="bathrooms"
-                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500">
-                </div>
-                <div class="mb-4">
-                    <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image URL</label>
-                    <input type="text" id="image" name="image"
-                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500">
-                </div>
-                <div class="mb-4">
-                    <label for="available" class="flex items-center">
-                        <input type="checkbox" id="available" name="available" class="mr-2">
-                        <span class="text-gray-700 text-sm font-bold">Available for rent</span>
-                    </label>
-                </div>
-                <button type="submit"
-                    class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">Submit</button>
-            </form>
+    #id_available_for_rent {
+        /* Styles for the available_for_rent checkbox */
+        margin-right: 0.125rem; /* Adjust margin */
+        /* Add more styles as needed */
+    }
+
+    #messages-container {
+        /* Styles for the messages container */
+        /* Add styles here */
+    }
+
+    /* Adjust the button size */
+    button {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+        margin-top: 0.25rem;
+    }
+</style>
+
+<div class="min-h-screen flex justify-center items-center">
+    <div class="bg-white p-2 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-xl font-bold mb-2">Add Property</h2>
+        {% if messages %}
+        <div id="messages-container" class="p-1 text-center">
+            {% for msg in messages %}
+            <div class="bg-red-500 text-white p-1 rounded-md mb-1">
+                <span>{{ msg.message }}</span>
+                <button onclick="closeMessage(this)" class="ml-1 text-white">x</button>
+            </div>
+            {% endfor %}
         </div>
-    </div>
-</body>
 
-</html>
-    
+        <script>
+            function closeMessage(button) {
+                var messageContainer = button.parentElement;
+                messageContainer.style.display = 'none';
+            }
+
+            // Automatically hide messages after 3 seconds
+            setTimeout(function () {
+                var messagesContainer = document.getElementById('messages-container');
+                if (messagesContainer) {
+                    messagesContainer.style.display = 'none';
+                }
+            }, 5000);
+        </script>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-1">
+                <label for="id_title" class="block text-gray-700 text-xs font-bold mb-0.5">Title</label>
+                {{ form.title }}
+            </div>
+
+            <div class="mb-1">
+                <label for="id_description" class="block text-gray-700 text-xs font-bold mb-0.5">Description</label>
+                {{ form.description }}
+            </div>
+
+            <div class="mb-1">
+                <label for="id_location" class="block text-gray-700 text-xs font-bold mb-0.5">Location</label>
+                {{ form.location }}
+            </div>
+
+            <div class="mb-1">
+                <label for="id_price" class="block text-gray-700 text-xs font-bold mb-0.5">Price</label>
+                {{ form.price }}
+            </div>
+
+            <div class="mb-1">
+                <label for="id_bedrooms" class="block text-gray-700 text-xs font-bold mb-0.5">Bedrooms</label>
+                {{ form.bedrooms }}
+            </div>
+
+            <div class="mb-1">
+                <label for="id_bathrooms" class="block text-gray-700 text-xs font-bold mb-0.5">Bathrooms</label>
+                {{ form.bathrooms }}
+            </div>
+
+            <div class="mb-1">
+                <label for="id_image" class="block text-gray-700 text-xs font-bold mb-0.5">Image URL</label>
+                {{ form.image }}
+            </div>
+
+            <div class="mb-1">
+                <label for="id_available_for_rent" class="flex items-center">
+                    {{ form.available_for_rent }}
+                    <span class="text-gray-700 text-xs font-bold">Available for rent</span>
+                </label>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

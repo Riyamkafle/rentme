@@ -1,59 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-
-<body class="bg-gray-300">
-    <!-- Navbar -->
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="text-2xl font-bold">Your Brand</div>
-            <div class="hidden md:block">
-                <a href="#" class="px-4">Home</a>
-                <a href="#" class="px-4">About</a>
-                <a href="#" class="px-4">Services</a>
-                <a href="#" class="px-4">Contact</a>
-            </div>
-            <div class="md:hidden">
-                <!-- Mobile menu button -->
-                <button id="mobile-menu-button"
-                    class="focus:outline-none flex items-center px-3 py-2 border rounded text-white border-white hover:text-gray-200 hover:border-white">
-                    <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu"
-        class="md:hidden bg-blue-600 text-white py-2 px-4 mt-2 rounded-lg shadow-lg text-center hidden">
-        <a href="#" class="block py-2">Home</a>
-        <a href="#" class="block py-2">About</a>
-        <a href="#" class="block py-2">Services</a>
-        <a href="#" class="block py-2">Contact</a>
-    </div>
-
-    <!-- Login Section -->
-    <div class="flex justify-center items-center h-screen">
+{%extends 'base.html'%}
+{%block content%}
+    <div class=" my-5 flex justify-center items-center h-screen">
         <div class="bg-white rounded-lg px-10 py-10 max-w-md w-full shadow-md">
             <h2 class="text-3xl font-bold mb-4 text-blue-600 text-center">Register</h2>
             <div class="text-center mb-8">
                 <img src="https://via.placeholder.com/120" alt="Logo" class="mx-auto mb-4 rounded-full border-4 border-white">
             </div>
-            <form>
-                
+            {% if messages %}
+            <div id="messages-container" class="p-4 text-center">
+              {% for msg in messages %}
+                <div class="bg-red-500 text-white p-2 rounded-md mb-4">
+                  <span>{{ msg.message }}</span>
+                  <button onclick="closeMessage(this)" class="ml-2 text-white">x</button>
+                </div>
+              {% endfor %}
+            </div>
+          
+            <script>
+              function closeMessage(button) {
+                var messageContainer = button.parentElement;
+                messageContainer.style.display = 'none';
+              }
+          
+              // Automatically hide messages after 3 seconds
+              setTimeout(function () {
+                var messagesContainer = document.getElementById('messages-container');
+                if (messagesContainer) {
+                  messagesContainer.style.display = 'none';
+                }
+              }, 5000);
+            </script>
+          {% endif %}
+            <form method = "post" novalidate>
+                {%csrf_token%}
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">Usernames</label>
-                    <input type="email" id="email" name="email"
+                    <input type="email" id="email" name="username"
                         class="w-full px-3 py-2 rounded-lg bg-gray-100 focus:outline-none focus:ring focus:border-blue-300">
                 </div>
                 <div class="mb-4">
@@ -63,12 +45,12 @@
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">First Name</label>
-                    <input type="email" id="email" name="email"
+                    <input type="email" id="email" name="fname"
                         class="w-full px-3 py-2 rounded-lg bg-gray-100 focus:outline-none focus:ring focus:border-blue-300">
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700">Last Names</label>
-                    <input type="email" id="email" name="email"
+                    <input type="email" id="email" name="lname"
                         class="w-full px-3 py-2 rounded-lg bg-gray-100 focus:outline-none focus:ring focus:border-blue-300">
                 </div>
                 <div class="mb-6">
@@ -78,7 +60,7 @@
                 </div>
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                    <input type="password" id="password" name="password"
+                    <input type="password" id="password" name="cpassword"
                         class="w-full px-3 py-2 rounded-lg bg-gray-100 focus:outline-none focus:ring focus:border-blue-300">
                 </div>
                 <button type="submit"
@@ -98,6 +80,5 @@
             }
         });
     </script>
-</body>
 
-</html>
+{%endblock content%}

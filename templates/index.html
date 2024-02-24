@@ -1,0 +1,74 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="bg-gray-900 text-white py-20">
+    <div class="container mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Our Website</h1>
+        <p class="text-lg md:text-xl mb-8">Find the home and property rentals</p>
+        <form class="mx-auto flex gap- 3 max-w-lg" method = "get" action = "/">
+            <input type="text"
+                class="w-full px-4 py-3 rounded-full bg-gray-800 focus:outline-none focus:shadow-outline text-white"
+                placeholder="Search..." name = "search">
+                <button class="bg-yellow-500 p-3 rounded-full ml-3 text-white ">Search</button>
+        </form>
+    </div>
+</div>
+
+<!-- News Section -->
+<div class="container mx-auto mb-12 mt-12">
+    
+    <h2 class="text-3xl font-bold mb-8">Rentals</h2>
+    {% if messages %}
+    <div id="messages-container" class="p-4 text-center">
+      {% for msg in messages %}
+        <div class="bg-red-500 text-white p-2 rounded-md mb-4">
+          <span>{{ msg.message }}</span>
+          <button onclick="closeMessage(this)" class="ml-2 text-white">x</button>
+        </div>
+      {% endfor %}
+    </div>
+  
+    <script>
+      function closeMessage(button) {
+        var messageContainer = button.parentElement;
+        messageContainer.style.display = 'none';
+      }
+  
+      // Automatically hide messages after 3 seconds
+      setTimeout(function () {
+        var messagesContainer = document.getElementById('messages-container');
+        if (messagesContainer) {
+          messagesContainer.style.display = 'none';
+        }
+      }, 5000);
+    </script>
+  {% endif %}
+    <div class="flex mb-4">
+        <a id="availableTab" class="{% if not rent %}bg-blue-500{% else %}bg-gray-500{% endif %} mr-2 text-white px-4 py-2 rounded" href="/" >All</a>
+
+        <a id="availableTab" class="{% if rent == 'true' %}bg-blue-500{% else %}bg-gray-500{% endif %} mr-2 text-white px-4 py-2 rounded" href="/?available=true">Available for Rent</a>
+        <a id="notAvailableTab" class="{% if rent == 'false' %}bg-blue-500{% else %}bg-gray-500{% endif %} text-white px-4 py-2 rounded" href="/?available=false">Not Available for Rent</a>
+    </div>
+    {%if properties%}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- News Card 1 -->
+        {%for property in properties%}
+        <div class="bg-white rounded-lg p-6 shadow-lg overflow-hidden">
+            <img src="{{property.image.url}}" alt="News" class="w-full h-64 object-cover" >
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">{{property}}</h3>
+                <p class="text-gray-700">{{property.description|slice:50}}....</p>
+                <p class="text-gray-700 mt-2 font-bold">price : {{property.price}}</p>
+                
+            </div>
+            <a href="{%url 'propertyDetail' property.id%}" class="p-3 bg-green-500 rounded-xl text-white ml-5 shadow-md mb-3">View Detail</a>
+        </div>
+        {%endfor%}
+
+
+    </div>
+    {%else%}
+    <h1 class="text-center font-bold text-red-500 text-2xl">No rental available</h1>
+    {%endif%}
+</div>
+{%endblock content%}
