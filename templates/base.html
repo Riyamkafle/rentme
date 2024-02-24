@@ -1,0 +1,109 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+
+    <body class="bg-gray-100 flex   flex-col " style = "height : 100vh">
+        <!-- Navbar -->
+        <nav class="bg-gray-800 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="text-2xl font-bold">Your Brand</div>
+                <div class="hidden md:block">
+                    <a href="#" class="px-4">Home</a>
+                    <a href="#" class="px-4">About</a>
+                    <a href="#" class="px-4">Services</a>
+                    <a href="#" class="px-4">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-button"
+                        class="focus:outline-none flex items-center px-3 py-2 border rounded text-white border-white hover:text-gray-200 hover:border-white">
+                        <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu"
+            class="md:hidden bg-gray-800 text-white py-2 px-4 mt-2 rounded-lg shadow-lg text-center hidden">
+            <a href="#" class="block py-2">Home</a>
+            <a href="#" class="block py-2">About</a>
+            <a href="#" class="block py-2">Services</a>
+            <a href="#" class="block py-2">Contact</a>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="bg-gray-900 text-white py-20">
+            <div class="container mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Our Website</h1>
+                <p class="text-lg md:text-xl mb-8">Find the latest news, articles, and updates</p>
+                <div class="mx-auto max-w-lg">
+                    <input type="text"
+                        class="w-full px-4 py-3 rounded-full bg-gray-800 focus:outline-none focus:shadow-outline text-white"
+                        placeholder="Search...">
+                </div>
+            </div>
+        </div>
+
+        <!-- News Section -->
+        <div class="container mx-auto mb-12 mt-12">
+            <h2 class="text-3xl font-bold mb-8">Latest News</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/400x200" alt="News" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">News Title 1</h3>
+                        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+
+                <!-- News Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/400x200" alt="News" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">News Title 2</h3>
+                        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+
+                <!-- News Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://via.placeholder.com/400x200" alt="News" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">News Title 3</h3>
+                        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-gray-800 text-white py-8 mt-auto">
+            <div class="container mx-auto text-center">
+                <p>&copy; 2024 Your Company. All rights reserved.</p>
+            </div>
+        </footer>   
+
+        <script>
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', function () {
+                var mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        </script>
+    </body>
+
+    </html>
