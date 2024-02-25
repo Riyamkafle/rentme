@@ -15,7 +15,8 @@ urlpatterns = [
     path('properties/<int:pk>/delete/', views.property_delete, name='property_delete'),
     path('propertyList/',views.propertyList,name = "propertyList"),
     path('bookproperty/',views.bookproperty,name = "bookproperty"),
-    path('orderlist/',views.orderlist,name = "orderlist")
+    path('orderlist/',views.orderlist,name = "orderlist"),
+    path('aboutus/',views.aboutus,name = "aboutus")
 
 
 ]

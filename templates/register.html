@@ -1,10 +1,12 @@
 {%extends 'base.html'%}
+{%load static%}
 {%block content%}
     <div class=" my-5 flex justify-center items-center h-screen">
         <div class="bg-white rounded-lg px-10 py-10 max-w-md w-full shadow-md">
             <h2 class="text-3xl font-bold mb-4 text-blue-600 text-center">Register</h2>
             <div class="text-center mb-8">
-                <img src="https://via.placeholder.com/120" alt="Logo" class="mx-auto mb-4 rounded-full border-4 border-white">
+                <img src="{%static 'logo.jpg'%}" alt="Logo" class="mx-auto mb-4 rounded-full border-4 border-white" style="width:100px ">
+                <h1 class = "text-center font-bold text-gray-800">Home Rental</h1>
             </div>
             {% if messages %}
             <div id="messages-container" class="p-4 text-center">

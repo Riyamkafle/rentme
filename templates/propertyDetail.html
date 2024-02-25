@@ -1,4 +1,5 @@
 {%extends 'base.html'%}
+
 {%block content%}
     <style>
         /* Custom styles */
@@ -41,8 +42,9 @@
                     {%csrf_token%}
                     <input type="hidden" name="owner" value = {{property.owner.pk}}>
                     <input type="hidden" name = "property" value = {{property.pk}}>
+                    {%if property.available_for_rent%}
                     <button  class="p-3 bg-blue-500 rounded-xl shadow-xl mt-3 text-white">Book Now</button>
-
+                    {%endif%}
                 </form>
             </div>
         </div>  

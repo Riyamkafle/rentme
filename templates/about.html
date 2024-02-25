@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center mb-8">Creators</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- User 1 -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <img src="{%static 'ayush.jpg'%}" alt="User 1" class="w-24 h-24 rounded-full mx-auto mb-4">
+            <h2 class="text-xl font-semibold text-center mb-2">Ayush Pokherel </h2>
+
+        </div>
+        <!-- User 2 -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <img src="{%static 'nitish.jpg'%}" alt="User 2" class="w-24 h-24 rounded-full mx-auto mb-4">
+            <h2 class="text-xl font-semibold text-center mb-2">Nitish kumar Singh</h2>
+
+        </div>
+        <!-- User 3 -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <img src="{%static 'roshan.jpg'%}" alt="User 3" class="w-24 h-24 rounded-full mx-auto mb-4">
+            <h2 class="text-xl font-semibold text-center mb-2">Roshan Kumar Shah</h2>
+s
+        </div>
+    </div>
+</div>
+{%endblock content%}

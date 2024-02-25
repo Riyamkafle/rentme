@@ -212,36 +212,51 @@ def bookproperty(request):
         property = request.POST.get('property') 
         owner_ = User.objects.filter(pk =owner).first()
         property_ = Property.objects.filter(pk = property).first()
+        property_.available_for_rent = False
         
         book = BookProperty(property = property_,renter = request.user,owner = owner_)
         book.save()
+        property_.save()
         pdf_response = generate_pdf_report(book)
 
         return pdf_response
      
         
+
 def generate_pdf_report(book):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{book.property.title}_report.pdf"'
 
     # Create the PDF content using ReportLab
     pdf = canvas.Canvas(response)
-    pdf.drawString(100, 800, f"Property Title: {book.property.title}")
-    pdf.drawString(100, 780, f"Property Description: {book.property.description}")
-    pdf.drawString(100, 760, f"Location: {book.property.location}")
-    pdf.drawString(100, 740, f"Price: {book.property.price}")
-    pdf.drawString(100, 720, f"Bedrooms: {book.property.bedrooms}")
-    pdf.drawString(100, 700, f"Bathrooms: {book.property.bathrooms}")
-    pdf.drawString(100, 680, f"Owner: {book.owner.username}")
-    pdf.drawString(100, 660, f"Renter: {book.renter.username}")
+
+    # Add big title "Home Rental Receipt"
+    pdf.setFont("Helvetica-Bold", 20)
+    pdf.drawString(100, 800, "Home Rental Receipt")
+
+    # Add property details
+    pdf.setFont("Helvetica", 12)
+    pdf.drawString(100, 770, f"Property Title: {book.property.title}")
+    pdf.drawString(100, 750, f"Property Description: {book.property.description}")
+    pdf.drawString(100, 730, f"Location: {book.property.location}")
+    pdf.drawString(100, 710, f"Price: {book.property.price}")
+    pdf.drawString(100, 690, f"Bedrooms: {book.property.bedrooms}")
+    pdf.drawString(100, 670, f"Bathrooms: {book.property.bathrooms}")
+    pdf.drawString(100, 650, f"Owner: {book.owner.username}")
+    pdf.drawString(100, 630, f"Renter: {book.renter.username}")
     # Add more fields as needed
 
     # Save the PDF
     pdf.showPage()
     pdf.save()
 
-    return response
+    return response     
 
 def orderlist(request): 
     orders = BookProperty.objects.filter(owner = request.user)
     return render(request,'orderlist.html',{'orders':orders})
+
+
+
+def aboutus(request): 
+    return render(request,'about.html')
