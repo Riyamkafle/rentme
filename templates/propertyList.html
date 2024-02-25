@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="overflow-x-auto p-10">
+    {% if messages %}
+    <div id="messages-container" class="p-4 text-center">
+      {% for msg in messages %}
+        <div class="bg-red-500 text-white p-2 rounded-md mb-4">
+          <span>{{ msg.message }}</span>
+          <button onclick="closeMessage(this)" class="ml-2 text-white">x</button>
+        </div>
+      {% endfor %}
+    </div>
+  
+    <script>
+      function closeMessage(button) {
+        var messageContainer = button.parentElement;
+        messageContainer.style.display = 'none';
+      }
+  
+      // Automatically hide messages after 3 seconds
+      setTimeout(function () {
+        var messagesContainer = document.getElementById('messages-container');
+        if (messagesContainer) {
+          messagesContainer.style.display = 'none';
+        }
+      }, 5000);
+    </script>
+  {% endif %}
+    <table class="  min-w-full bg-white border border-gray-300">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b ">Id</th>
+                <th class="py-2 px-4 border-b ">Title</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {%for property in properties%}
+            <tr>
+                <td class="py-2 px-4 border-b text-center">{{property.id}}</td>
+                <td class="py-2 px-4 border-b text-center">{{property.title}}</td>
+                <td class="py-2 px-4 border-b text-center">
+                    <a  href = "{%url 'property_update' property.pk%}" class="bg-blue-500 text-white px-2 py-1 rounded">Update</a>
+                    <a  href = "{%url 'property_delete' property.pk%}" class="bg-red-500 text-white px-2 py-1 rounded">delete</a>
+                </td>
+            </tr>
+            {%endfor%}
+           
+        </tbody>
+    </table>
+</div>
+
+{%endblock content%}

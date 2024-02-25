@@ -24,3 +24,13 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+
+class BookProperty(models.Model): 
+    owner = models.ForeignKey(User,on_delete = models.CASCADE,related_name = "owner")
+    renter = models.ForeignKey(User,on_delete = models.CASCADE,related_name = "renter")
+    property = models.ForeignKey(Property,on_delete = models.CASCADE)
+
+    # def __str__(self): 
+    #     return f"{self.owner.username}-{self.renter.username}-{self.property.title}"

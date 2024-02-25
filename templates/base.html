@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home Page</title>
+        <title>Rental System</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     </head>
 
@@ -12,12 +12,15 @@
         <!-- Navbar -->
         <nav class="bg-gray-800 text-white p-4">
             <div class="container mx-auto flex justify-between items-center">
-                <a  href = "/" class=" cursor-pointer text-2xl font-bold">Your Brand</a>
+                <a  href = "/" class=" cursor-pointer text-2xl font-bold">Rental System</a>
                 <div class="hidden md:block">
                     <a href="/" class="px-4">Home</a>
                     {%if request.user.is_authenticated%}
                     <a href="{%url 'property_create'%}" class="px-4">Create Property</a>
                     <a href="/messages/" class="px-4">Views messages</a>
+                    <a href="/propertyList/" class="px-4">Manage Property</a>
+                    <a href="/orderlist/" class="px-4">OrderList</a>
+
                     <a href="/logout/" class="px-4">logout</a>
                     
                     {%else%}
@@ -53,7 +56,7 @@
         {%endblock content%}        
         <footer class="bg-gray-800 text-white py-8 mt-auto">
             <div class="container mx-auto text-center">
-                <p>&copy; 2024 Your Company. All rights reserved.</p>
+                <p>&copy; 2024 Rental System. All rights reserved.</p>
             </div>
         </footer>   
 

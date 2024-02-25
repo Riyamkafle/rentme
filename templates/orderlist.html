@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="overflow-x-auto p-10">
+    <table class="  min-w-full bg-white border border-gray-300">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b ">Property</th>
+                <th class="py-2 px-4 border-b ">owner</th>
+                <th class="py-2 px-4 border-b ">renter</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for order in orders%}
+            <tr>
+                <td class="py-2 px-4 border-b text-center">{{order.property.title}}</td>
+                <td class="py-2 px-4 border-b text-center">{{order.owner}}</td>
+                <td class="py-2 px-4 border-b text-center">{{order.renter}}</td>
+                <td class="py-2 px-4 border-b text-center">
+                </td>
+            </tr>
+            {%endfor%}
+           
+        </tbody>
+    </table>
+</div>
+
+{%endblock content%}

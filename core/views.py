@@ -4,6 +4,13 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from .models import *
 from .forms import *
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.template import loader
+from django.contrib.auth.models import User
+from .models import Property, BookProperty
+from reportlab.pdfgen import canvas
 
 # Create your views here.
 
@@ -134,7 +141,7 @@ def contact_owner(request):
     return render(request, 'propertyDetail.html', {})
 
 
-def messages(request):
+def message(request):
     if request.user.is_authenticated:
         messages = Contact.objects.filter(owner = request.user)
         return render(request,'viewMessage.html',{'messages':messages})
@@ -159,7 +166,7 @@ def property_create(request):
             fm =form.save(commit=False)
             fm.owner = request.user
             fm.save()
-            # messages.success(request,'Property Listed')
+            messages.success(request,'Property Listed')
             return redirect('property_create')
     else:
         form = PropertyForm()
@@ -169,11 +176,72 @@ def property_create(request):
 
 def property_update(request, pk):
     property = get_object_or_404(Property, pk=pk)
+    if property.owner !=request.user:
+        return redirect('/')
     if request.method == 'POST':
         form = PropertyForm(request.POST, request.FILES, instance=property)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            messages.success(request,"property updated")
+            return redirect('/propertyList/')
     else:
         form = PropertyForm(instance=property)
     return render(request, 'RegisterProperty.html', {'form': form})
+
+def property_delete(request, pk):
+    property = get_object_or_404(Property, pk=pk)
+    
+    property.delete()
+    messages.success(request,"property deleted")
+
+    return redirect('/propertyList/')
+    
+
+def propertyList(request):
+    if request.user.is_authenticated:
+        properties = Property.objects.filter(owner = request.user)
+        return render(request,'propertyList.html',{'properties':properties})
+    else:
+        return redirect('/')
+    
+
+
+def bookproperty(request):
+     if request.method == "POST": 
+        owner = request.POST.get('owner')
+        property = request.POST.get('property') 
+        owner_ = User.objects.filter(pk =owner).first()
+        property_ = Property.objects.filter(pk = property).first()
+        
+        book = BookProperty(property = property_,renter = request.user,owner = owner_)
+        book.save()
+        pdf_response = generate_pdf_report(book)
+
+        return pdf_response
+     
+        
+def generate_pdf_report(book):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{book.property.title}_report.pdf"'
+
+    # Create the PDF content using ReportLab
+    pdf = canvas.Canvas(response)
+    pdf.drawString(100, 800, f"Property Title: {book.property.title}")
+    pdf.drawString(100, 780, f"Property Description: {book.property.description}")
+    pdf.drawString(100, 760, f"Location: {book.property.location}")
+    pdf.drawString(100, 740, f"Price: {book.property.price}")
+    pdf.drawString(100, 720, f"Bedrooms: {book.property.bedrooms}")
+    pdf.drawString(100, 700, f"Bathrooms: {book.property.bathrooms}")
+    pdf.drawString(100, 680, f"Owner: {book.owner.username}")
+    pdf.drawString(100, 660, f"Renter: {book.renter.username}")
+    # Add more fields as needed
+
+    # Save the PDF
+    pdf.showPage()
+    pdf.save()
+
+    return response
+
+def orderlist(request): 
+    orders = BookProperty.objects.filter(owner = request.user)
+    return render(request,'orderlist.html',{'orders':orders})
