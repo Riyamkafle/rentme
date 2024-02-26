@@ -49,11 +49,11 @@
       <form id="filterForm" action="/" class="flex sm:flex-row flex-col justify-center gap-3 items-center" method="get">
           <div class="flex gap-1 flex-col items-center">
               <label for="startdate" class="font-bold">From</label>
-              <input type="Number" id="from" class="p-2 px-5 bg-gray-200 border-1 rounded-xl border-gray-300" name="from" value="{{ request.GET.from }}">
+              <input type="Number" id="from" placeholder="price" class="p-2 px-5 bg-gray-200 border-1 rounded-xl border-gray-300" name="from" value="{{ request.GET.from }}">
           </div>
           <div class="flex gap-1 flex-col items-center">
               <label for="enddate" class="font-bold">To</label>
-              <input type="nnumber" id="enddate" class="p-2 px-5 bg-gray-200 border-1 rounded-xl border-gray-300" name="to" value="{{ request.GET.to }}">
+              <input type="number" id="enddate"placeholder="price" class="p-2 px-5 bg-gray-200 border-1 rounded-xl border-gray-300" name="to" value="{{ request.GET.to }}">
           </div>
           
           <div class="flex gap-1 flex-col items-center">
