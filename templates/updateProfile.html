@@ -1,0 +1,59 @@
+<!-- update_profile.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    {% if messages %}
+    <div id="messages-container" class="p-4 text-center">
+      {% for msg in messages %}
+        <div class="bg-green-500 text-white p-2 rounded-md mb-4">
+          <span>{{ msg.message }}</span>
+          <button onclick="closeMessage(this)" class="ml-2 text-white">x</button>
+        </div>
+      {% endfor %}
+    </div>
+  
+    <script>
+      function closeMessage(button) {
+        var messageContainer = button.parentElement;
+        messageContainer.style.display = 'none';
+      }
+  
+      // Automatically hide messages after 3 seconds
+      setTimeout(function () {
+        var messagesContainer = document.getElementById('messages-container');
+        if (messagesContainer) {
+          messagesContainer.style.display = 'none';
+        }
+      }, 5000);
+    </script>
+  {% endif %}
+    <h1 class="text-3xl font-bold mb-8">Update Profile</h1>
+    <div class="bg-white rounded-lg shadow-md p-8">
+        <form method="post" action="{% url 'update_profile' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="first_name" class="block text-black">First Name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{firstname}}" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="last_name" class="block text-gray-700">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" value="{{lastname}}" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700">Email:</label>
+                <input type="email" id="email" name="email" value="{{ email }}" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="phone" class="block text-gray-700">Phone:</label>
+                <input type="text" id="phone" name="phone" value="{{phone}}" class="w-full border border-gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:border-blue-500">
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                Update Profile
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+    

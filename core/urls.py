@@ -16,7 +16,9 @@ urlpatterns = [
     path('propertyList/',views.propertyList,name = "propertyList"),
     path('bookproperty/',views.bookproperty,name = "bookproperty"),
     path('orderlist/',views.orderlist,name = "orderlist"),
-    path('aboutus/',views.aboutus,name = "aboutus")
+    path('aboutus/',views.aboutus,name = "aboutus"),
+    path('update-profile/', views.update_profile, name='update_profile'),
+
 
 
 ]

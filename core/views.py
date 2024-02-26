@@ -15,17 +15,28 @@ from reportlab.pdfgen import canvas
 # Create your views here.
 
 def index(request): 
-    properties = Property.objects.all() 
+    properties = Property.objects.filter(available_for_rent=True) 
     search = request.GET.get('search')
-    rent = request.GET.get('available')
-    if search is not None: 
-        properties = Property.objects.filter(title__icontains = search)
-    if rent=="true": 
-        properties = Property.objects.filter(available_for_rent = True)
-    elif rent == "false":
-        properties = Property.objects.filter(available_for_rent = False)
+    from_ = request.GET.get('from')
+    to_ = request.GET.get('to')
+    location= request.GET.get('location')
+    if from_ and to_:
+        properties = properties.filter(price__gte=from_, price__lt=to_)
 
-    return render(request,'index.html',{'properties':properties,"rent":rent})
+    elif from_:
+        properties = properties.filter(price__gte=from_)
+
+    elif to_:
+        properties = properties.filter(price__lt=to_)
+
+    # Add the following for the search user field
+    if location:
+        properties = properties.filter(location=location)
+    if search is not None: 
+        properties = Property.objects.filter(title__icontains = search,available_for_rent = True)
+
+
+    return render(request,'index.html',{'properties':properties})
 
 
 def propertyDetail(request,id):
@@ -73,6 +84,7 @@ def register(request):
             last_name = request.POST.get('lname')
             password = request.POST.get('password')
             confirm_password = request.POST.get('cpassword')
+            phone = request.POST.get('phone')
 
             # Your non-field validation logic
             if not username or not email or not first_name or not last_name or not password or not confirm_password:
@@ -98,6 +110,8 @@ def register(request):
             user.first_name = first_name
             user.last_name = last_name
             user.save()
+            phone = Phone(user = user,phone = phone)
+            phone.save()
 
             # Log in the user
             user = authenticate(request, username=username, password=password)
@@ -213,8 +227,8 @@ def bookproperty(request):
         owner_ = User.objects.filter(pk =owner).first()
         property_ = Property.objects.filter(pk = property).first()
         property_.available_for_rent = False
-        
-        book = BookProperty(property = property_,renter = request.user,owner = owner_)
+        phone = Phone.objects.filter(user = request.user).first()
+        book = BookProperty(property = property_,renter = request.user,owner = owner_,renter_phone= phone.phone)
         book.save()
         property_.save()
         pdf_response = generate_pdf_report(book)
@@ -237,9 +251,9 @@ def generate_pdf_report(book):
     # Add property details
     pdf.setFont("Helvetica", 12)
     pdf.drawString(100, 770, f"Property Title: {book.property.title}")
-    pdf.drawString(100, 750, f"Property Description: {book.property.description}")
     pdf.drawString(100, 730, f"Location: {book.property.location}")
     pdf.drawString(100, 710, f"Price: {book.property.price}")
+    pdf.drawString(100, 750, f"Property Description: {book.property.description}") 
     pdf.drawString(100, 690, f"Bedrooms: {book.property.bedrooms}")
     pdf.drawString(100, 670, f"Bathrooms: {book.property.bathrooms}")
     pdf.drawString(100, 650, f"Owner: {book.owner.username}")
@@ -260,3 +274,36 @@ def orderlist(request):
 
 def aboutus(request): 
     return render(request,'about.html')
+
+
+
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')  # Get phone number from the form
+        
+        # Update user profile
+        user = request.user
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.save()
+        
+        # Update phone number
+        phone_obj, created = Phone.objects.get_or_create(user=user)
+        phone_obj.phone = phone
+        phone_obj.save()
+        
+        messages.success(request, 'Your profile has been updated successfully!')
+        return redirect('update_profile')  # Redirect to the same page to clear form data
+        
+    context = {"firstname":request.user.first_name,
+               "lastname":request.user.last_name,
+               "email":request.user.email,
+               "phone":Phone.objects.filter(user = request.user).first().phone
+               }
+
+    return render(request, 'updateProfile.html',context)
