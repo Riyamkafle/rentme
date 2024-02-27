@@ -70,7 +70,12 @@
         <!-- News Card 1 -->
         {%for property in properties%}
         <div class="bg-white rounded-lg p-6 shadow-lg overflow-hidden">
-            <img src="{{property.image.url}}" alt="News" class="w-full h-64 object-cover" >
+          {% if property.image %}
+          <img src="{{property.image.url}}" alt="News" class="w-full h-64 object-cover" >
+          {% else %}
+                <img src="# alt="Property Image" class="w-full h-auto rounded-t-lg">
+                {% endif %}
+            
             <div class="p-6">
                 <h3 class="text-xl font-bold mb-2">{{property}}</h3>
                 <p class="text-gray-700 mt-2 font-bold">Location: {{property.location}}</p>

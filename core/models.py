@@ -9,7 +9,7 @@ class Property(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     bedrooms = models.PositiveIntegerField()
     bathrooms = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='img')
+    image = models.ImageField(upload_to='img',null=True,blank=True)
     available_for_rent = models.BooleanField(default=False)
 
     def __str__(self):

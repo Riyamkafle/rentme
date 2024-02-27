@@ -25,7 +25,11 @@
     <div class="container mx-auto px-4 py-8">
         <div class="property-card flex flex-col lg:flex-row">
             <div class="property-image lg:w-1/2">
+                {% if property.image %}
                 <img src="{{property.image.url}}" alt="Property Image" class="w-full h-auto rounded-t-lg">
+                {% else %}
+                <img src="#" alt="Property Image" class="w-full h-auto rounded-t-lg">
+                {% endif %}
             </div>
             <div class="property-details p-6 lg:w-1/2">
                 <h2 class="text-2xl font-bold mb-4">{{property.title}}</h2>
@@ -52,13 +56,35 @@
         <div class="container mx-auto">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <!-- Property Card 1 -->
-                <div class="bg-white rounded-lg shadow-md p-2 max-w-md max-h-md">
-                    <img src="https://picsum.photos/200/150" alt="Property Image" class="w-full h-auto rounded-lg mb-2">
-                    <h2 class="text-lg font-semibold mb-1">Property Title</h2>
-                    <p class="text-gray-700 mb-1">Location: Kathmandu, Nepal</p>
-                    <p class="text-gray-700">Price: 20,000 </p> 
+               {% if recommended_property %}
+
+               {% for property in recommended_property %}
+               <div class="bg-white rounded-lg shadow-md p-2 max-w-md max-h-md">
+                   {% if property.image %}
+                       <img src="{{property.image.url}}" alt="Property Image" class="w-full h-auto rounded-t-lg">
+                   {% else %}
+                       <img src="#" alt="Property Image" class="w-full h-auto rounded-t-lg">
+                   {% endif %}
+                   <h2 class="text-lg font-semibold mb-1">{{property.title}}</h2>
+                   <p class="text-gray-700 mb-1">Location: {{property.location}}</p>
+                   <p class="text-gray-700">Price: Rs {{property.price}} </p> 
+                   <br>
+
+                <div class="flex flex-row justify-content-center">
+                   <a href="{%url 'propertyDetail' property.id%}" class="text-white text-sm py-2 px-2 bg-green-500 rounded-xl hover:bg-green-800 hover:text-white">View Details</a>
                 </div>
-        
+
+               </div>
+           {% endfor %}
+           
+               {% else %}
+
+               <div class="bg-white rounded-lg shadow-md p-2 max-w-md max-h-md">
+                <p>Insufficient Data , Retrain the model for more recommendation </p>
+               </div>
+               {% endif %}
+
+               {% comment %}
                 <!-- Property Card 2 -->
                 <div class="bg-white rounded-lg shadow-md p-2 max-w-md max-h-md">
                     <img src="https://picsum.photos/200/150" alt="Property Image" class="w-full h-auto rounded-lg mb-2">
@@ -74,7 +100,7 @@
                     <p class="text-gray-700 mb-1">Location: Bhaktapur, Nepal</p>
                     <p class="text-gray-700">Price: 25,000 </p> 
                 </div>
-        
+        {% endcomment %}
                 <!-- Repeat for more property cards -->
             </div>
         </div>

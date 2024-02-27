@@ -14,6 +14,27 @@ from reportlab.pdfgen import canvas
 
 # Create your views here.
 
+import pandas as pd
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.metrics.pairwise import linear_kernel
+import joblib
+# Function to get recommendations based on item index
+def get_recommendations(item_index, cosine_similarities=None):
+    file_path = "ds_new.csv"
+    df = pd.read_csv(file_path)
+    if cosine_similarities is None:
+        # Load the saved cosine similarity matrix
+        cosine_similarities = joblib.load("cosine_similarity_model.joblib")    
+    sim_scores = list(enumerate(cosine_similarities[item_index]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[1:4]  # Top 5 recommendations (excluding itself)
+    item_indices = [i[0] for i in sim_scores]
+    return item_indices
+    # return df['title'].iloc[item_indices]
+    
+index_to_recommend = 2
+recommendations = get_recommendations(index_to_recommend)
+
 def index(request): 
     properties = Property.objects.filter(available_for_rent=True) 
     search = request.GET.get('search')
@@ -43,9 +64,18 @@ def propertyDetail(request,id):
     if request.user.is_authenticated:
         try : 
             property = Property.objects.get(pk = id)
-        except: 
+            if not property.id > 43:
+                
+                items_to_recommend = get_recommendations(property.id)
+                print(items_to_recommend)
+                recommended_property = Property.objects.filter(id__in= items_to_recommend)
+                print(recommended_property)
+            else:
+                recommended_property = None
+        except Exception as e: 
+            print(e)
             return redirect('/')
-        return render(request,'propertyDetail.html',{'property':property})
+        return render(request,'propertyDetail.html',{'property':property,'recommended_property':recommended_property})
     else:
         return redirect('/login/')
 

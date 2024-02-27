@@ -1,0 +1,44 @@
+id,title,description,price,no_of_bedrooms,no_of_bathrooms,location
+1,Scenic Mountain Cabin,Cozy 3-bedroom cabin with breathtaking mountain views,1800,3,2,Thulomill Chowk
+2,Urban Studio with City Skyline Views,Compact studio apartment with panoramic city views,1000,1,1,Puspalal Chowk
+3,Beachfront Paradise,Spacious 4-bedroom house steps away from the beach,3500,4,3,Mahendra Chowk
+4,Quaint Village House,Traditional 2-bedroom house in a peaceful village setting,1200,2,1,Traffic Chowk
+5,Executive Suite in Luxury Hotel,Luxurious suite with top-notch amenities,4500,1,2,Shanti Chowk
+6,Modern Duplex with Rooftop Terrace,Contemporary 3-bedroom duplex with a rooftop terrace,2800,3,2,Roadcess Chowk
+7,Tranquil Lakeside Retreat,Secluded 2-bedroom cottage with lake views,1600,2,1,Puspalal Chowk
+8,Downtown Penthouse with Skyline Views,Elegant 2-bedroom penthouse in the heart of the city,2200,2,2,Mahendra Chowk
+9,Chic Loft in Arts District,Stylish loft apartment surrounded by art galleries,1900,1,1,Traffic Chowk
+10,Family-Friendly Suburban Home,Comfortable 4-bedroom house in a family-friendly neighborhood,2800,4,2,Thulomill Chowk
+11,Modern Apartment with City Views,Spacious 2-bedroom apartment in the heart of the city,1500,2,1,Puspalal Chowk
+12,Hillside Retreat with Private Pool,Secluded 5-bedroom villa with a private pool,5000,5,4,Puspalal Chowk
+13,Scenic Mountain Cabin,Cozy 3-bedroom cabin with breathtaking mountain views,1800,3,2,Puspalal Chowk
+14,Urban Studio with City Skyline Views,Compact studio apartment with panoramic city views,1000,1,1,Puspalal Chowk
+15,Tranquil Lakeside Retreat,Secluded 2-bedroom cottage with lake views,1600,2,1,Puspalal Chowk
+16,Cozy Family Home with Garden,Charming 3-bedroom house with a lovely garden,2500,3,2,Mahendra Chowk
+17,Charming Cottage in the Woods,Quaint 2-bedroom cottage surrounded by nature,1200,2,1,Mahendra Chowk
+18,Downtown Penthouse with Skyline Views,Elegant 2-bedroom penthouse in the heart of the city,2200,2,2,Mahendra Chowk
+19,Luxury Penthouse with Panoramic Views,Stunning 4-bedroom penthouse with high-end amenities,4000,4,3,Traffic Chowk
+20,Beachfront Paradise,Spacious 4-bedroom house steps away from the beach,3500,4,3,Traffic Chowk
+21,Contemporary Loft in Artsy Neighborhood,Stylish loft apartment surrounded by art galleries,1900,1,1,Traffic Chowk
+22,Affordable Starter Home,Compact 1-bedroom house in a quiet neighborhood,800,1,1,Thulomill Chowk
+23,Scenic Mountain Cabin,Cozy 3-bedroom cabin with breathtaking mountain views,1800,3,2,Thulomill Chowk
+24,Family-Friendly Suburban Home,Comfortable 4-bedroom house in a family-friendly neighborhood,2800,4,2,Thulomill Chowk
+25,Riverfront Townhouse with Views,Elegant 3-bedroom townhouse overlooking the river,3000,3,2,Shanti Chowk
+26,Executive Suite in Luxury Hotel,Luxurious suite with top-notch amenities,4500,1,2,Shanti Chowk
+27,City Center Condo with Modern Design,Sleek and modern 2-bedroom condo in the city center,1800,2,2,Roadcess Chowk
+28,Modern Duplex with Rooftop Terrace,Contemporary 3-bedroom duplex with a rooftop terrace,2800,3,2,Roadcess Chowk
+29,Chic Apartment with City Skyline Views,Modern 1-bedroom apartment with stunning city views,1200,1,1,Puspalal Chowk
+30,Spacious Penthouse with Terrace,Luxurious 3-bedroom penthouse with a spacious terrace,3000,3,2,Puspalal Chowk
+31,Urban Oasis in the Heart of the City,Contemporary 2-bedroom condo with urban amenities,2000,2,2,Puspalal Chowk
+32,Historic Townhouse with Modern Upgrades,Restored 4-bedroom townhouse with modern amenities,2800,4,3,Mahendra Chowk
+33,Quaint Cottage with Garden Views,2-bedroom cottage surrounded by a picturesque garden,1500,2,1,Mahendra Chowk
+34,Downtown Loft with Industrial Charm,Stylish loft apartment in the heart of the city,2200,1,1,Mahendra Chowk
+35,Sleek Condo with Riverfront Access,Modern 2-bedroom condo with direct access to the river,1800,2,2,Traffic Chowk
+36,Contemporary Townhome in Arts District,3-bedroom townhome with artistic touches,2500,3,2,Traffic Chowk
+37,Seaside Villa with Private Beach,5-bedroom villa with a private beachfront,5000,5,4,Traffic Chowk
+38,Rustic Cabin in the Woods,2-bedroom cabin nestled in a serene forest setting,1000,2,1,Thulomill Chowk
+39,Modern Townhouse with Mountain Views,3-bedroom townhouse with panoramic mountain views,2200,3,2,Thulomill Chowk
+40,Executive Apartment with Cityscape Views,Luxurious 2-bedroom apartment with cityscape views,2500,2,2,Shanti Chowk
+41,Classic Villa with Garden Oasis,4-bedroom villa with a tranquil garden oasis,3500,4,3,Shanti Chowk
+42,Luxury Condo with Skyline Panorama,3-bedroom condo with panoramic views of the city skyline,3000,3,2,Roadcess Chowk
+43,Charming Bungalow with Courtyard,2-bedroom bungalow with a charming courtyard,1800,2,1,Roadcess Chowk

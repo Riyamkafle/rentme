@@ -1,0 +1,392 @@
+[
+{
+  "model": "core.property",
+  "pk": 11,
+  "fields": {
+    "owner": 1,
+    "title": "3BHK",
+    "location": "shantichok",
+    "description": "A good Home for Rent",
+    "price": "15000.00",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "image": "img/WhatsApp_Image_2024-02-25_at_13.15.39_f68a5d2c_8aHuWB0.jpg",
+    "available_for_rent": false
+  }
+},
+{
+  "model": "core.property",
+  "pk": 12,
+  "fields": {
+    "owner": 1,
+    "title": "2BHK",
+    "location": "biratnagar",
+    "description": "Home on Rent",
+    "price": "7000.00",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "image": "img/20240225_170639.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 13,
+  "fields": {
+    "owner": 1,
+    "title": "3BHK",
+    "location": "biratnagar shantichowk",
+    "description": "Rent for small family only",
+    "price": "17000.00",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "image": "img/20240225_170709.jpg",
+    "available_for_rent": false
+  }
+},
+{
+  "model": "core.property",
+  "pk": 14,
+  "fields": {
+    "owner": 1,
+    "title": "4BHK",
+    "location": "biratnagar 10",
+    "description": "Home rent for students",
+    "price": "10000.00",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "image": "img/20240225_170804.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 15,
+  "fields": {
+    "owner": 1,
+    "title": "3BHK",
+    "location": "biratnagar",
+    "description": "home on rent",
+    "price": "16000.00",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "image": "img/20240225_170842.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 16,
+  "fields": {
+    "owner": 1,
+    "title": "4BHK",
+    "location": "shantichowk",
+    "description": "home on rent",
+    "price": "16000.00",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "image": "img/20240225_170918.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 17,
+  "fields": {
+    "owner": 1,
+    "title": "4BHK",
+    "location": "hospital chowk biratnagar",
+    "description": "home on rent",
+    "price": "19000.00",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "image": "img/20240225_172146.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 18,
+  "fields": {
+    "owner": 1,
+    "title": "3BHK",
+    "location": "biratnagar",
+    "description": "home on rent",
+    "price": "13000.00",
+    "bedrooms": 3,
+    "bathrooms": 1,
+    "image": "img/20240225_172101.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 19,
+  "fields": {
+    "owner": 1,
+    "title": "4BHK",
+    "location": "biratnagar",
+    "description": "home on rent",
+    "price": "22000.00",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "image": "img/20240225_172357.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 20,
+  "fields": {
+    "owner": 1,
+    "title": "3BHK",
+    "location": "biratnagar 10",
+    "description": "home on rent",
+    "price": "13000.00",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "image": "img/20240225_172313.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 21,
+  "fields": {
+    "owner": 1,
+    "title": "2BHK",
+    "location": "hatkhola",
+    "description": "home on rent",
+    "price": "9000.00",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "image": "img/20240225_172412.jpg",
+    "available_for_rent": false
+  }
+},
+{
+  "model": "core.property",
+  "pk": 22,
+  "fields": {
+    "owner": 1,
+    "title": "4BHK",
+    "location": "puspalal chowk",
+    "description": "home on rent",
+    "price": "25000.00",
+    "bedrooms": 4,
+    "bathrooms": 2,
+    "image": "img/20240225_172723.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 23,
+  "fields": {
+    "owner": 1,
+    "title": "2BHK",
+    "location": "Traffic chowk",
+    "description": "Home on rent",
+    "price": "19000.00",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "image": "img/20240225_172734.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 24,
+  "fields": {
+    "owner": 1,
+    "title": "2BHK",
+    "location": "kanchanbari",
+    "description": "home on rent",
+    "price": "13000.00",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "image": "img/20240225_172629.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 25,
+  "fields": {
+    "owner": 1,
+    "title": "6BHK",
+    "location": "tarffic chowk",
+    "description": "for rent",
+    "price": "30000.00",
+    "bedrooms": 6,
+    "bathrooms": 4,
+    "image": "img/20240225_172858.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 26,
+  "fields": {
+    "owner": 1,
+    "title": "8BHK",
+    "location": "Traffic chowk",
+    "description": "for rent",
+    "price": "50000.00",
+    "bedrooms": 8,
+    "bathrooms": 7,
+    "image": "img/20240225_173754.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 27,
+  "fields": {
+    "owner": 1,
+    "title": "4BHK",
+    "location": "mahendra chowk",
+    "description": "for rent",
+    "price": "15000.00",
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "image": "img/20240225_173108.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 28,
+  "fields": {
+    "owner": 1,
+    "title": "5BHK",
+    "location": "puspalal chowk",
+    "description": "for rent",
+    "price": "17000.00",
+    "bedrooms": 5,
+    "bathrooms": 4,
+    "image": "img/20240225_172933.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 29,
+  "fields": {
+    "owner": 1,
+    "title": "6BHK",
+    "location": "Roadcess",
+    "description": "for rent",
+    "price": "25000.00",
+    "bedrooms": 6,
+    "bathrooms": 3,
+    "image": "img/20240225_173546.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 30,
+  "fields": {
+    "owner": 1,
+    "title": "4BHK",
+    "location": "thulo mill",
+    "description": "for rent",
+    "price": "18000.00",
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "image": "img/20240225_173503.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 31,
+  "fields": {
+    "owner": 1,
+    "title": "3BHK",
+    "location": "shantichok",
+    "description": "for rent",
+    "price": "14000.00",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "image": "img/20240225_173206.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 32,
+  "fields": {
+    "owner": 1,
+    "title": "5BHK",
+    "location": "Airport road",
+    "description": "Home rent for small family",
+    "price": "15000.00",
+    "bedrooms": 5,
+    "bathrooms": 3,
+    "image": "img/20240225_173703.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 33,
+  "fields": {
+    "owner": 1,
+    "title": "1 BHK",
+    "location": "Airport road",
+    "description": "home rent for office worker",
+    "price": "30000.00",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "image": "img/20240225_173802.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 34,
+  "fields": {
+    "owner": 1,
+    "title": "2 BHK",
+    "location": "Milan chowk",
+    "description": "home rent for family",
+    "price": "19000.00",
+    "bedrooms": 5,
+    "bathrooms": 4,
+    "image": "img/20240225_173307.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 35,
+  "fields": {
+    "owner": 1,
+    "title": "2BHK",
+    "location": "hatkhola",
+    "description": "for rent",
+    "price": "10000.00",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "image": "img/20240225_173448.jpg",
+    "available_for_rent": true
+  }
+},
+{
+  "model": "core.property",
+  "pk": 36,
+  "fields": {
+    "owner": 1,
+    "title": "8bhk",
+    "location": "Traffic chowk",
+    "description": "for office use",
+    "price": "70000.00",
+    "bedrooms": 8,
+    "bathrooms": 8,
+    "image": "img/WhatsApp_Image_2024-02-25_at_14.29.45_b6c46f2b_mCspJ1F.jpg",
+    "available_for_rent": true
+  }
+}
+]
