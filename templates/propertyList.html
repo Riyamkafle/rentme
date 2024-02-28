@@ -32,6 +32,9 @@
             <tr>
                 <th class="py-2 px-4 border-b ">Id</th>
                 <th class="py-2 px-4 border-b ">Title</th>
+                <th class="py-2 px-4 border-b ">Status</th>
+
+
                 
             </tr>
         </thead>
@@ -40,6 +43,8 @@
             <tr>
                 <td class="py-2 px-4 border-b text-center">{{property.id}}</td>
                 <td class="py-2 px-4 border-b text-center">{{property.title}}</td>
+                <td class="py-2 px-4 border-b text-center">{{property.is_approved}}</td>
+
                 <td class="py-2 px-4 border-b text-center">
                     <a  href = "{%url 'property_update' property.pk%}" class="bg-blue-500 text-white px-2 py-1 rounded">Update</a>
                     <a  href = "{%url 'property_delete' property.pk%}" class="bg-red-500 text-white px-2 py-1 rounded">delete</a>

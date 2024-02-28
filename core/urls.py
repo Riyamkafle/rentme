@@ -18,6 +18,10 @@ urlpatterns = [
     path('orderlist/',views.orderlist,name = "orderlist"),
     path('aboutus/',views.aboutus,name = "aboutus"),
     path('update-profile/', views.update_profile, name='update_profile'),
+    path('dashboardListing/',views.dashboardPropertyListing,name = "dashboardProductListing"),
+    path('adminorderlist/',views.adminorderlist,name = "adminorderlisting"),
+    path('adminmanageproperty/',views.adminpropertyList,name = "adminpropertyList")
+
 
 
 

@@ -11,6 +11,7 @@ class Property(models.Model):
     bathrooms = models.PositiveIntegerField()
     image = models.ImageField(upload_to='img',null=True,blank=True)
     available_for_rent = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default = False)
 
     def __str__(self):
         return self.title

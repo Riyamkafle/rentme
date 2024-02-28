@@ -91,5 +91,24 @@
     {%else%}
     <h1 class="text-center font-bold text-red-500 text-2xl">No rental available</h1>
     {%endif%}
+    <div class="flex justify-center mt-4">
+      {% if properties.has_previous %}
+      <a href="?page=1" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-l">
+          First
+      </a>
+      <a href="?page={{ properties.previous_page_number }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4">
+          Previous
+      </a>
+      {% endif %}
+      <span class="bg-gray-200 text-gray-700 font-semibold py-2 px-4">{{ properties.number }}</span>
+      {% if properties.has_next %}
+      <a href="?page={{ properties.next_page_number }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4">
+          Next
+      </a>
+      <a href="?page={{ properties.paginator.num_pages }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-r">
+          Last
+      </a>
+      {% endif %}
+  </div>
 </div>
 {%endblock content%}

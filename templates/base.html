@@ -21,9 +21,16 @@
                     {%if request.user.is_authenticated%}
                     <a href="{%url 'property_create'%}" class="px-4">Add Property</a>
                     <a href="/messages/" class="px-4">Views messages</a>
+                    {%if not request.user.is_superuser%}
                     <a href="/propertyList/" class="px-4">Manage Property</a>
                     <a href="/orderlist/" class="px-4">OrderList</a>
+                    {%endif%}
                     <a href="/update-profile/" class="px-4">Update Profiles</a>
+                    {%if request.user.is_superuser%}
+                    <a href="/dashboardListing/" class="px-4">dashboard</a>
+        
+                    {%endif%}
+                    
                     
 
                     <a href="/logout/" class="px-4">logout</a>
@@ -56,9 +63,15 @@
             {%if request.user.is_authenticated%}
             <a href="{%url 'property_create'%}" class="px-4">Add Property</a>
             <a href="/messages/" class="px-4">Views messages</a>
+            {%if not request.user.is_superuser%}
             <a href="/propertyList/" class="px-4">Manage Property</a>
             <a href="/orderlist/" class="px-4">OrderList</a>
+            {%endif%}
             <a href="/update-profile/" class="px-4">Update Profiles</a>
+            {%if request.user.is_superuser%}
+            <a href="/dashboardListing/" class="px-4">dashboard</a>
+
+            {%endif%}
             
 
             <a href="/logout/" class="px-4">logout</a>

@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.contrib.auth.models import User
 from .models import Property, BookProperty
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from reportlab.pdfgen import canvas
 
 # Create your views here.
@@ -35,29 +37,40 @@ def get_recommendations(item_index, cosine_similarities=None):
 index_to_recommend = 2
 recommendations = get_recommendations(index_to_recommend)
 
-def index(request): 
-    properties = Property.objects.filter(available_for_rent=True) 
+def index(request):
+    properties_list = Property.objects.filter(available_for_rent=True, is_approved=True)
+
     search = request.GET.get('search')
     from_ = request.GET.get('from')
     to_ = request.GET.get('to')
-    location= request.GET.get('location')
+    location = request.GET.get('location')
+
     if from_ and to_:
-        properties = properties.filter(price__gte=from_, price__lt=to_)
-
+        properties_list = properties_list.filter(price__gte=from_, price__lt=to_)
     elif from_:
-        properties = properties.filter(price__gte=from_)
-
+        properties_list = properties_list.filter(price__gte=from_)
     elif to_:
-        properties = properties.filter(price__lt=to_)
+        properties_list = properties_list.filter(price__lt=to_)
 
-    # Add the following for the search user field
     if location:
-        properties = properties.filter(location=location)
-    if search is not None: 
-        properties = Property.objects.filter(title__icontains = search,available_for_rent = True)
+        properties_list = properties_list.filter(location=location)
 
+    if search:
+        properties_list = properties_list.filter(title__icontains=search)
 
-    return render(request,'index.html',{'properties':properties})
+    # Pagination
+    paginator = Paginator(properties_list, 10)  # Show 10 properties per page
+    page_number = request.GET.get('page')
+    try:
+        properties = paginator.page(page_number)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        properties = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        properties = paginator.page(paginator.num_pages)
+
+    return render(request, 'index.html', {'properties': properties})    
 
 
 def propertyDetail(request,id):
@@ -243,7 +256,12 @@ def property_delete(request, pk):
 
 def propertyList(request):
     if request.user.is_authenticated:
-        properties = Property.objects.filter(owner = request.user)
+        if request.user.is_superuser:
+            properties = Property.objects.all()
+
+        else:
+            
+            properties = Property.objects.filter(owner = request.user)
         return render(request,'propertyList.html',{'properties':properties})
     else:
         return redirect('/')
@@ -262,8 +280,9 @@ def bookproperty(request):
         book.save()
         property_.save()
         pdf_response = generate_pdf_report(book)
+        messages.success(request,'booked successfully')
+        return redirect(f'/property/{property}/')
 
-        return pdf_response
      
         
 
@@ -337,3 +356,85 @@ def update_profile(request):
                }
 
     return render(request, 'updateProfile.html',context)
+
+
+
+def dashboardPropertyListing(request):
+    if request.user.is_superuser:
+        properties_list = Property.objects.filter(is_approved=False)
+        
+        # Pagination
+        paginator = Paginator(properties_list, 10)  # Show 10 properties per page
+        page_number = request.GET.get('page')
+        try:
+            properties = paginator.page(page_number)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            properties = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            properties = paginator.page(paginator.num_pages)
+        
+        if request.method == "POST":
+            property_id = request.POST.get('propertyId')
+            property_ = Property.objects.filter(pk=property_id).first()
+            if property_:
+                property_.is_approved = True
+                if not property_.available_for_rent:
+                    property_.available_for_rent = True
+                property_.save()
+                messages.success(request, 'Property approved')
+                return redirect('dashboardProductListing')
+
+        return render(request, 'adminPropertyListing.html', {'properties': properties})
+    else:
+        return redirect("/")
+    
+    
+    
+    
+    
+def adminorderlist(request):
+    if request.user.is_superuser:
+        orders_list = BookProperty.objects.filter(owner=request.user)
+        
+        # Pagination
+        paginator = Paginator(orders_list, 10)  # Show 10 orders per page
+        page_number = request.GET.get('page')
+        try:
+            orders = paginator.page(page_number)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            orders = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            orders = paginator.page(paginator.num_pages)
+
+        return render(request, 'adminorderlist.html', {'orders': orders})
+    else:
+        return redirect('/')
+    
+    
+    
+def adminpropertyList(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            properties_list = Property.objects.all()
+        else:
+            properties_list = Property.objects.filter(owner=request.user)
+        
+        # Pagination
+        paginator = Paginator(properties_list, 10)  # Show 10 properties per page
+        page_number = request.GET.get('page')
+        try:
+            properties = paginator.page(page_number)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            properties = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            properties = paginator.page(paginator.num_pages)
+
+        return render(request, 'adminmanageproperty.html', {'properties': properties})
+    else:
+        return redirect('/')

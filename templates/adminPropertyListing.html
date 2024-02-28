@@ -1,0 +1,91 @@
+{%extends 'admindashboard.html'%}
+{%block content%}
+<div class="flex-1 p-8">
+    <h2 class="text-2xl font-semibold mb-4">Properties Listing</h2>
+               
+    {% if messages %}
+    <div id="messages-container" class="p-4 text-center">
+      {% for msg in messages %}
+        <div class="bg-green-500 text-white p-2 rounded-md mb-4">
+          <span>{{ msg.message }}</span>
+          <button onclick="closeMessage(this)" class="ml-2 text-white">x</button>
+        </div>
+      {% endfor %}
+    </div>
+  
+    <script>
+      function closeMessage(button) {
+        var messageContainer = button.parentElement;
+        messageContainer.style.display = 'none';
+      }
+  
+      // Automatically hide messages after 3 seconds
+      setTimeout(function () {
+        var messagesContainer = document.getElementById('messages-container');
+        if (messagesContainer) {
+          messagesContainer.style.display = 'none';
+        }
+      }, 5000);
+    </script>
+  {% endif %}
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">id</th>
+
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Property</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bedrooms</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bathrooms</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {%for property in properties%}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">{{property.id}}</td>
+
+                    <td class="px-6 py-4 whitespace-nowrap">{{property.title}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{property.price}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{property.location}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{property.bedrooms}}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{property.bathrooms}}</td>
+
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <a href="{%url 'propertyDetail' property.id%}" class="p-3 bg-blue-500 mb-3 rounded-xl text-white shadow-xl">View Detail</a>
+                        <form action="" method = "post">
+                            {%csrf_token%}
+                            <input type="hidden" name="propertyId" value = "{{property.id}}">
+                            <button class="p-3 bg-green-500 text-white rounded-xl shadow-xl mt-5">Approve</button>
+                        </form>
+                    </td>
+                </tr>
+                {%endfor%}
+
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+        <div class="flex justify-center mt-4">
+            {% if properties.has_previous %}
+            <a href="?page=1" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-l">
+                First
+            </a>
+            <a href="?page={{ properties.previous_page_number }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4">
+                Previous
+            </a>
+            {% endif %}
+            {% if properties.has_next %}
+            <a href="?page={{ properties.next_page_number }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4">
+                Next
+            </a>
+            <a href="?page={{ properties.paginator.num_pages }}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-r">
+                Last
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{%endblock content%}
