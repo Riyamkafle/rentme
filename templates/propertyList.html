@@ -43,7 +43,12 @@
             <tr>
                 <td class="py-2 px-4 border-b text-center">{{property.id}}</td>
                 <td class="py-2 px-4 border-b text-center">{{property.title}}</td>
-                <td class="py-2 px-4 border-b text-center">{{property.is_approved}}</td>
+                {%if property.is_approved%}
+                <td class="py-2 px-4 border-b text-center">Approved</td>
+                {%else%}
+                <td class="py-2 px-4 border-b text-center">Pending</td>
+                {%endif%}
+
 
                 <td class="py-2 px-4 border-b text-center">
                     <a  href = "{%url 'property_update' property.pk%}" class="bg-blue-500 text-white px-2 py-1 rounded">Update</a>
