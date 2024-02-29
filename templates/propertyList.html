@@ -5,7 +5,7 @@
     {% if messages %}
     <div id="messages-container" class="p-4 text-center">
       {% for msg in messages %}
-        <div class="bg-red-500 text-white p-2 rounded-md mb-4">
+        <div class="bg-green-500 text-white p-2 rounded-md mb-4">
           <span>{{ msg.message }}</span>
           <button onclick="closeMessage(this)" class="ml-2 text-white">x</button>
         </div>
